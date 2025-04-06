@@ -1,0 +1,6 @@
+leidenalg
+pandas
+networkx
+community
+igraph
+seaborn
