@@ -1,65 +1,106 @@
 # harmonicClustering
 
-Harmonic Clustering is a research-driven project that applies **network science techniques** to uncover **listener communities** from large-scale music streaming logs. Using the **LFM-1b Last.fm dataset**, we build user-user graphs based on temporal playlist overlaps and apply **community detection algorithms** to find natural clusters of music taste.
+**Harmonic Clustering** is a research project focused on identifying organic listener communities from large-scale music streaming data. Instead of traditional demographic-based clustering, we adopt a **network-science approach** by building **user-user graphs** derived from temporal listening patterns and applying **community detection algorithms** to uncover shared music interests.
 
 ---
 
 ## Motivation
 
-In the era of personalized streaming, users often discover and consume music in unique but overlapping patterns. This project explores how these overlaps can form the basis of **organic music communities**, uncovering hidden listener groups who share similar track interests over time.
+Streaming platforms accumulate rich temporal listening histories. Rather than grouping users by genres or playlists alone, this project investigates how temporal overlaps in listening behavior can naturally lead to the formation of music communities. We aim to highlight the social dimensions of music discovery by mapping these overlaps into graph structures.
 
 ---
 
 ## Dataset
 
-We use the [LFM-1b Dataset](https://www.cp.jku.at/datasets/LFM-1b/) which contains over 1 billion listening events from Last.fm users.
+We use a filtered version of the **Last.fm 1K users dataset**, which includes detailed listening histories for 1,000 users over several years.
 
-- Subsampled to ~1 million rows for efficiency.
-- Weekly pseudo-playlists are created for each user.
-- User similarity is computed via Jaccard index on track overlap.
+- Extracted listening records for a fixed 3-month duration.
+- Grouped listening history into **weekly pseudo-playlists**.
+- Sampled a subset of users with high listening activity for focused analysis.
 
 ---
 
-## Methods
+## Methodology
 
-- Preprocessing with pandas and NumPy
-- Constructing pseudo-playlists from weekly listening history
-- Creating a user-user graph based on shared tracks
+### Preprocessing
 
-- Applying **Louvain** or **Label Propagation** for community detection
-- Visualizing with NetworkX and matplotlib
+- Parsed the Last.fm-1K data to extract relevant fields (user, artist, timestamp).
+- Created weekly pseudo-playlists per user based on timestamps.
+- Filtered tracks to retain only frequent ones and active users.
+
+### Graph Construction
+
+- Computed pairwise user similarity using **Jaccard index** based on shared tracks in overlapping weeks.
+- Created a weighted **user-user similarity graph** using NetworkX.
+
+### Community Detection
+
+- Applied multiple community detection algorithms:
+  - **Louvain algorithm**
+  - **Label Propagation**
+  - **Girvan-Newman (edge betweenness)**
+- Compared modularity scores and cluster distributions.
+  
+---
+## Visualization
+
+We visualized the user-user network using force-directed layouts. Nodes represent users and edges indicate similarity based on weekly listening overlap. Communities were detected using different algorithms and visualized below.
+
+### Combined Community Graph
+
+<img src="notebooks/figures/community_detection_graph.png" width="600">
+
+### Louvain Community Detection
+
+<img src="notebooks/figures/louvain_community_cleaned.png" width="600">
+
+### Label Propagation (LPA) Clusters
+
+<img src="notebooks/figures/lpa_community_cleaned.png" width="600">
+
+### Harmonic Clustering
+
+<img src="notebooks/figures/harmonic_community_cleaned.png" width="600">
+
+### Community Size Comparison
+
+<img src="notebooks/figures/community_size_comparison.png" width="600">
+
+Each visualization highlights unique clustering behavior. Louvain and LPA show differing granularity, while Harmonic Clustering offers smoother transitions. The size comparison plot gives insight into the distribution of cluster memberships.
+
 ---
 
 ## Goals
 
-- Understand how music consumption patterns form community structures
-- Provide an open-source framework for analyzing music graphs
-- Contribute a concise research paper that demonstrates the effectiveness of this approach
+- Investigate whether users naturally cluster based on listening time and content overlaps.
+- Build an interpretable and reproducible framework for **temporal music graph analysis**.
+- Contribute a short research report demonstrating the effectiveness of this methodology.
 
 ---
 
-## Example Visualization
+## Sample Output
 
-_Coming soon!_ We'll visualize clusters of users and their top shared tracks.
+Example visualizations of the user-user network, along with detected communities and representative artists, will be included in the report and repository.
 
 ---
 
-## Status
+## Project Status
 
-&#x2611; Preprocessing <br>
-&#x2612; Similarity matrix + graph construction <br>
-&#x2612; Community detection <br>
-&#x2612; Graph visualization <br>
-&#x2612; Research paper writing
+- [x] Data preprocessing and playlist formation  
+- [x] User similarity computation  
+- [x] Graph construction  
+- [x] Community detection  
+- [x] Visualization and analysis  
+- [x] Report writing  
 
 ---
 
 ## License
 
-This project is under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## 🙌 Contributions
+## Contributions
 
-Feel free to fork, contribute, or reach out with ideas and improvements!
+Contributions, feedback, and suggestions are welcome. Please fork the repository and open a pull request for any additions or improvements.
