@@ -2,6 +2,7 @@
 
 **Harmonic Clustering** is a research project focused on identifying organic listener communities from large-scale music streaming data. Instead of traditional demographic-based clustering, we adopt a **network-science approach** by building **user-user graphs** derived from temporal listening patterns and applying **community detection algorithms** to uncover shared music interests.
 
+> Check out the full implementation in our [main notebook](notebooks/harmonicClustering.ipynb).
 ---
 
 ## Motivation
